@@ -10,7 +10,8 @@ app.on('ready',()=>
 
 	mainWindow = new BrowserWindow({
 		width: 300,
-		height: 730,
+		height: 700,
+		resizable: false,
 	});
 	mainWindow.loadURL('file://' + __dirname + '/main.html');
 	mainWindow.on('closed',()=>app.quit());

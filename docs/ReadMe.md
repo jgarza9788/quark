@@ -12,6 +12,7 @@ Version: v0.1
     - [node.js](#nodejs)
     - [npm](#npm)
     - [electron](#electron)
+    - [electron-json-storage](#electron-json-storage)
 - [Using](#using)
 
 <!-- /TOC -->
@@ -37,8 +38,14 @@ npm --version
 ```
 npm install -g electron
 ```
+```
+npm install electron
+```
 
-
+##  electron-json-storage
+```
+npm install --save electron-json-storage
+```
 
 # Using
 

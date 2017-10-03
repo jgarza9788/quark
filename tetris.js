@@ -40,6 +40,9 @@ function newPiece()
 	nP = pieces[parseInt(Math.random() * pieces.length, 10)];
 	showNextPiece();
 	console.log(p[2]);
+
+	// document.getElementById("unpausebutton").backgroundColor = p[1];
+
 	return new Piece(p[0], p[1]);
 }
 
