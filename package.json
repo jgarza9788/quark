@@ -1,0 +1,29 @@
+{
+  "name": "quark",
+  "version": "1.0.0",
+  "description": "a tetris clone",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "electron .",
+    "electron": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgarza9788/quark.git"
+  },
+  "keywords": [
+    "tetris"
+  ],
+  "author": "Justin Garza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jgarza9788/quark/issues"
+  },
+  "homepage": "https://github.com/jgarza9788/quark#readme",
+  "dependencies": {
+    "electron": "^1.7.8"
+  }
+}
