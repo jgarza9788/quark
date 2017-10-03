@@ -8,7 +8,10 @@ app.on('ready',()=>
 {
 	//console.log('app is ready');
 
-	mainWindow = new BrowserWindow({});
+	mainWindow = new BrowserWindow({
+		width: 300,
+		height: 730,
+	});
 	mainWindow.loadURL('file://' + __dirname + '/main.html');
 	mainWindow.on('closed',()=>app.quit());
 

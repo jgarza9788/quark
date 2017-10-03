@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Quark</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-  </body>
+	<head>
+		<meta charset="utf-8" />
+		<title>Tetris</title>
+		<link rel="stylesheet" href="res/materialize.min.css">
+		<!-- <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+		<link rel="stylesheet" href="res/index.css">
+	</head>
+	<body>
+		<!-- <div style="width:240px"> -->
+				
+		<div>.</div>
+					
+		<div id="info">
+			<div id="nlabel">Next:</div>
+			<img id="next" src=""></img>
+			<div id="lines">Lines: 0</div>
+			<!-- <span id="lines">Lines: 0</span> -->
+		</div>
+
+		<!-- <span id="lines">Lines: 0</span>  -->
+		<canvas id="board">
+		</canvas>
+		<div>.</div>
+
+		<script src="tetrominoes.js"></script>
+		<script src="tetris.js"></script>
+	</body>
 </html>
