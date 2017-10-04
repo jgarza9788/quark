@@ -6,6 +6,10 @@ var clear = window.getComputedStyle(canvas).getPropertyValue('background-color')
 var width = 10;
 var height = 20;
 var tilesz = 24;
+var state = "start"; //start , pause, gameover game
+var startMenu = document.getElementById('start');
+var pauseMenu = document.getElementById('pause');
+var goMenu = document.getElementById('gameover');
 canvas.width = width * tilesz;
 canvas.height = height * tilesz;
 
@@ -339,7 +343,15 @@ function drawBoard() {
 	ctx.fillStyle = fs;
 }
 
-function main() {
+function main() 
+{
+	changeState(state);
+
+	if (state != "game")
+	{
+		return;
+	}
+
 	var now = Date.now();
 	var delta = now - dropStart;
 
@@ -352,6 +364,66 @@ function main() {
 	if (!done) {
 		requestAnimationFrame(main);
 	}
+}
+
+// var state = "start"; //start , pause, gameover game
+// var startMenu = document.getElementById('start');
+// var pauseMenu = document.getElementById('pause');
+// var goMenu = document.getElementById('gameover');
+
+function changeState(newState)
+{
+	if (state == newState)
+	{
+		return;
+	}
+
+	if (newState == "start")
+	{
+		onStart();
+	}
+	else if (newState == "pause")
+	{
+		onPause();
+	}
+	else if (newState == "gameover")
+	{
+		onGameover()
+	}
+	else if (newState == "game")
+	{
+		onGame()
+	}
+
+	state = newState;
+}
+
+function onStart()
+{
+	startMenu.style.display = "block";
+	pauseMenu.style.display = "none";
+	goMenu.style.display = "none";
+}
+
+function onPause()
+{
+	startMenu.style.display = "none";
+	pauseMenu.style.display = "block";
+	goMenu.style.display = "none";
+}
+
+function onGameover()
+{
+	startMenu.style.display = "none";
+	pauseMenu.style.display = "none";
+	goMenu.style.display = "block";
+}
+
+function onGame()
+{
+	startMenu.style.display = "none";
+	pauseMenu.style.display = "none";
+	goMenu.style.display = "none";
 }
 
 piece = newPiece();
