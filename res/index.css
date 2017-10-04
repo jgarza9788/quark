@@ -57,7 +57,7 @@ html
     line-height: 50px;
 }
 
-#pause
+#menu
 {
     position: absolute;
     z-index: 99;
@@ -75,8 +75,26 @@ html
 }
 
 
-#pause button
+
+#unpausebutton
 {
+    background-color: #a2d92b;
+    border: none;
+    color: #000000;
+    /* padding: 15px 32px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 20px 50px;
+    width: 150px;
+    height: 50px;
+    /* cursor: pointer; */
+}
+
+#restartbutton
+{
+    background-color: #6be5f2;
     border: none;
     color: #000000;
     text-align: center;
@@ -86,24 +104,55 @@ html
     margin: 20px 50px;
     width: 150px;
     height: 50px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
-
-#unpausebutton
+#donateButton
 {
-    background-color: #a2d92b;
-}
-
-#restartbutton
-{
-    background-color: #6be5f2;
-}
-
-#instructionsbutton
-{
+    /* background-color: #6be5f2; */
     background-color: #a37ef2;
+    border: none;
+    color: #000000;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 20px 50px;
+    width: 150px;
+    height: 50px;
+    /* cursor: pointer; */
 }
+
+#instructions
+{
+    
+    background-color: #f22987;
+    border: none;
+    color: #000000;
+    /* padding: 15px 32px; */
+    /* text-align: center; */
+    /* text-decoration: none; */
+    /* display: inline-block; */
+    font-size: 16px;
+    /* margin: 20px 50px; */
+    margin: 20px auto ;
+    width: 150px;
+    height: 175px;
+    opacity: 1;
+
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: 7;
+
+    /* font-weight: bold; */
+}
+
+#instructions #title
+{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
 
 button:hover
 {

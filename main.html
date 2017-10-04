@@ -4,16 +4,28 @@
 		<meta charset="utf-8" />
 		<title>Tetris</title>
 		<link rel="stylesheet" href="res/materialize.min.css">
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
 		<!-- <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 		<link rel="stylesheet" href="res/index.css">
 	</head>
 	<body>
 		<!-- <div style="width:240px"> -->
-		<div id="pause">
-			<h1>Pause</h1>
+		<div id="menu">
+			<h1 id="menutitle">Menu</h1>
 			<button id= "unpausebutton">un<b>P</b>ause</button>
 			<button id= "restartbutton"><b>R</b>estart</button>
-			<button id= "instructionsbutton"><b>I</b>nstructions</button>
+			<button id= "donateButton"><b>D</b>onate</button>
+			<!-- <button id= "instructionsbutton"><b>I</b>nstructions</button> -->
+			<div id = "instructions">
+				<div id="title">**Instructions**</div>
+				<div>&rarr;</div><div>Right</div>
+				<div>&larr;</div><div>Left</div>
+				<div>&#8634</div><div>Up</div>
+				<div>&#8635</div><div>Down</div>
+				<div>&#8615;</div><div>Ctrl</div>
+				<!-- <div><i class="fa fa-pause"></i> <i class="fa fa-play"></i></div><div>P</div> -->
+				<div>&#10074;&#10074; &#9658;</i></div><div>P</div>
+			</div>
 		</div>
 		<div id="game">		
 			<div id="info">
