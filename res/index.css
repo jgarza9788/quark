@@ -57,7 +57,7 @@ html
     line-height: 50px;
 }
 
-#menu
+#start
 {
     position: absolute;
     z-index: 99;
@@ -68,15 +68,42 @@ html
     text-align: center;
     font-size: 1.5em;
     display: block;
-    color: #f22987;
+    color: #4b4b4b;
     /* display: none; */
-    /* margin: 0 auto; */
+}
 
+#pause
+{
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    opacity: 0.90;
+    text-align: center;
+    font-size: 1.5em;
+    display: block;
+    color: #4b4b4b;
+    /* display: none; */
+}
+
+#gameover
+{
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    opacity: 0.90;
+    text-align: center;
+    /* font-size: 1.5em; */
+    display: block;
+    color: #4b4b4b;
+    /* display: none; */
 }
 
 
-
-#unpausebutton
+#gbutton
 {
     background-color: #a2d92b;
     border: none;
@@ -92,7 +119,7 @@ html
     /* cursor: pointer; */
 }
 
-#restartbutton
+#cbutton
 {
     background-color: #6be5f2;
     border: none;
@@ -107,10 +134,25 @@ html
     /* cursor: pointer; */
 }
 
-#donateButton
+#pbutton
 {
     /* background-color: #6be5f2; */
     background-color: #a37ef2;
+    border: none;
+    color: #000000;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 20px 50px;
+    width: 150px;
+    height: 50px;
+    /* cursor: pointer; */
+}
+
+#rbutton
+{
+    background-color: #f22987;
     border: none;
     color: #000000;
     text-align: center;
@@ -129,12 +171,7 @@ html
     background-color: #f22987;
     border: none;
     color: #000000;
-    /* padding: 15px 32px; */
-    /* text-align: center; */
-    /* text-decoration: none; */
-    /* display: inline-block; */
     font-size: 16px;
-    /* margin: 20px 50px; */
     margin: 20px auto ;
     width: 150px;
     height: 175px;
@@ -143,8 +180,29 @@ html
     display: grid;
     grid-template-columns: repeat(2,1fr);
     grid-template-rows: 7;
-
     /* font-weight: bold; */
+}
+
+#scores
+{
+    
+    background-color: #f22987;
+    border: none;
+    color: #000000;
+    font-size: 16px;
+    margin: 20px auto ;
+    width: 250px;
+    height: 275px;
+    overflow-y: scroll;
+    /* opacity: 0.90; */
+
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    grid-template-rows: auto;
+    
+    /* font-weight: bold; */
+    text-align: left;
+    padding: 10px;
 }
 
 #instructions #title
@@ -153,10 +211,21 @@ html
     grid-column-end: 3;
 }
 
+#scores div
+{
+    height: 25px;
+}
+
+/* #scores #title
+{
+    grid-column-start: 1;
+    grid-column-end: 4;
+} */
+
 
 button:hover
 {
-    opacity: 0.50;
+    opacity: 0.75;
 }
 
 
