@@ -67,8 +67,8 @@ html
     opacity: 0.90;
     text-align: center;
     font-size: 1.5em;
-    display: block;
     color: #4b4b4b;
+    display: block;
     /* display: none; */
 }
 
@@ -82,9 +82,9 @@ html
     opacity: 0.90;
     text-align: center;
     font-size: 1.5em;
-    display: block;
     color: #4b4b4b;
-    /* display: none; */
+    /* display: block; */
+    display: none;
 }
 
 #gameover
@@ -97,9 +97,9 @@ html
     opacity: 0.90;
     text-align: center;
     /* font-size: 1.5em; */
-    display: block;
     color: #4b4b4b;
-    /* display: none; */
+    /* display: block; */
+    display: none;
 }
 
 

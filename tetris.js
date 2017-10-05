@@ -6,7 +6,7 @@ var clear = window.getComputedStyle(canvas).getPropertyValue('background-color')
 var width = 10;
 var height = 20;
 var tilesz = 24;
-var state = "start"; //start , pause, gameover game
+var state = "null"; //start , pause, gameover game
 var startMenu = document.getElementById('start');
 var pauseMenu = document.getElementById('pause');
 var goMenu = document.getElementById('gameover');
@@ -361,8 +361,22 @@ function main()
 		dropStart = now;
 	}
 
-	if (!done) {
+	if (!done) 
+	{
 		requestAnimationFrame(main);
+	}
+}
+
+function playpause()
+{
+	console.log("tetris.js-playpause");
+	if (state == "game")
+	{
+		changeState("pause");
+	}
+	else if (state == "pause")
+	{
+		changeState("game");
 	}
 }
 
@@ -373,6 +387,8 @@ function main()
 
 function changeState(newState)
 {
+	console.log("tetris.js-changeState()-" + newState );
+	console.log(state + "->" + newState );
 	if (state == newState)
 	{
 		return;
@@ -388,14 +404,17 @@ function changeState(newState)
 	}
 	else if (newState == "gameover")
 	{
-		onGameover()
+		onGameover();
 	}
 	else if (newState == "game")
 	{
-		onGame()
+		onGame();
+		
 	}
 
+	console.log("tetris.js-changeState()-" + newState );
 	state = newState;
+	main();
 }
 
 function onStart()

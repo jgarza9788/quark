@@ -12,7 +12,7 @@
 		<!-- <div style="width:240px"> -->
 		<div id="start">
 			<h1>::Quark::</h1>
-			<button id= "gbutton"><b>P</b>lay</button>
+			<button id= "gbutton" onclick="changeState_game()"><b>P</b>lay</button>
 			<button id= "pbutton"><b>D</b>onate</button>
 			<div id = "instructions">
 				<div id="title">**Instructions**</div>
@@ -60,6 +60,40 @@
 			<canvas id="board">
 			</canvas>
 		</div>
+
+		<script>
+			const electron = require('electron');
+	  		const {ipcRenderer} = electron;
+	  
+			ipcRenderer.on('playpause',(event)=>
+			{
+			  console.log('playpause');
+			  playpause();
+			});
+
+			ipcRenderer.on('newState',(event,data)=>
+			{
+			  console.log("changeState:" + data);
+			  changeState(data);
+			});
+
+			function changeState_start()
+			{
+				changeState("start");
+			}
+
+			function changeState_game()
+			{
+				changeState("game");
+			}
+
+			function changeState_pause()
+			{
+				changeState("pause");
+			}
+
+
+		</script>
 
 		<script src="tetrominoes.js"></script>
 		<script src="tetris.js"></script>
