@@ -445,6 +445,23 @@ function onGame()
 	goMenu.style.display = "none";
 }
 
+function resetAndStart()
+{
+
+	for (var x=0; x< pat.length;x++)
+	{
+		for (var y=0; y< pat.length;y++)
+		{
+			board[y][x] = "";
+		}
+	}
+
+	lines = 0;
+	linecount.textContent = "Lines: " + lines;
+
+	changeState("game");
+}
+
 piece = newPiece();
 drawBoard();
 linecount.textContent = "Lines: 0";

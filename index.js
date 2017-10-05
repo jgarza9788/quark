@@ -22,8 +22,6 @@ app.on('ready',()=>
 	const mainMenu = Menu.buildFromTemplate(menuTemplate);
 	Menu.setApplicationMenu(mainMenu);
 
-	console.log("set state to start");
-	mainWindow.webContents.send('newState',"start");
 
 });
 

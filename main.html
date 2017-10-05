@@ -26,8 +26,8 @@
 		</div>
 		<div id="pause">
 			<h1>Pause</h1>
-			<button id= "gbutton">un<b>P</b>ause</button>
-			<button id= "cbutton"><b>R</b>estart</button>
+			<button id= "gbutton" onclick="playpause()">un<b>P</b>ause</button>
+			<button id= "cbutton" onclick="changeState_restart()"><b>R</b>estart</button>
 			<button id= "pbutton"><b>D</b>onate</button>
 			<div id = "instructions">
 				<div id="title">**Instructions**</div>
@@ -41,7 +41,7 @@
 		</div>
 		<div id="gameover">
 			<h2>Game Over</h2>
-			<button id= "gbutton"><b>R</b>estart</button>
+			<button id= "gbutton" onclick="changeState_restart()"><b>R</b>estart</button>
 			<button id= "cbutton"><b>D</b>onate</button>
 			<div id = "scores">
 				<div id="title">Scores</div>
@@ -89,9 +89,13 @@
 
 			function changeState_pause()
 			{
-				changeState("pause");
+				playpause();
 			}
 
+			function changeState_restart()
+			{
+				resetAndStart();
+			}
 
 		</script>
 
