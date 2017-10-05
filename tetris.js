@@ -213,7 +213,8 @@ Piece.prototype.lock = function() {
 
 			if (this.y + iy < 0) {
 				// Game ends!
-				alert("You're done!");
+				// alert("You're done!");
+				changeState("gameover");
 				done = true;
 				return;
 			}
@@ -447,19 +448,26 @@ function onGame()
 
 function resetAndStart()
 {
+	console.log("restart Start");
 
-	for (var x=0; x< pat.length;x++)
+
+	for (var y = 0; y < height; y++) 
 	{
-		for (var y=0; y< pat.length;y++)
+		for (var x = 0; x < width; x++) 
 		{
 			board[y][x] = "";
 		}
 	}
 
+	drawBoard();
+
+	console.log("0 lines");
 	lines = 0;
 	linecount.textContent = "Lines: " + lines;
 
 	changeState("game");
+
+	console.log("game!");
 }
 
 piece = newPiece();

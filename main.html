@@ -12,7 +12,7 @@
 		<!-- <div style="width:240px"> -->
 		<div id="start">
 			<h1>::Quark::</h1>
-			<button id= "gbutton" onclick="changeState_game()"><b>P</b>lay</button>
+			<button id= "gbutton" onclick="changeState('game')"><b>P</b>lay</button>
 			<button id= "pbutton"><b>D</b>onate</button>
 			<div id = "instructions">
 				<div id="title">**Instructions**</div>
@@ -27,7 +27,7 @@
 		<div id="pause">
 			<h1>Pause</h1>
 			<button id= "gbutton" onclick="playpause()">un<b>P</b>ause</button>
-			<button id= "cbutton" onclick="changeState_restart()"><b>R</b>estart</button>
+			<button id= "cbutton" onclick="resetAndStart()"><b>R</b>estart</button>
 			<button id= "pbutton"><b>D</b>onate</button>
 			<div id = "instructions">
 				<div id="title">**Instructions**</div>
@@ -41,7 +41,7 @@
 		</div>
 		<div id="gameover">
 			<h2>Game Over</h2>
-			<button id= "gbutton" onclick="changeState_restart()"><b>R</b>estart</button>
+			<button id= "gbutton" onclick="resetAndStart()"><b>R</b>estart</button>
 			<button id= "cbutton"><b>D</b>onate</button>
 			<div id = "scores">
 				<div id="title">Scores</div>
@@ -65,16 +65,21 @@
 			const electron = require('electron');
 	  		const {ipcRenderer} = electron;
 	  
-			ipcRenderer.on('playpause',(event)=>
+			ipcRenderer.on('blur',(event)=>
 			{
 			  console.log('playpause');
-			  playpause();
+			  changeState("pause");
 			});
 
 			ipcRenderer.on('newState',(event,data)=>
 			{
 			  console.log("changeState:" + data);
 			  changeState(data);
+			});
+
+			ipcRenderer.on('playpause',(event,data)=>
+			{
+				playpause();
 			});
 
 			function changeState_start()
@@ -87,15 +92,7 @@
 				changeState("game");
 			}
 
-			function changeState_pause()
-			{
-				playpause();
-			}
 
-			function changeState_restart()
-			{
-				resetAndStart();
-			}
 
 		</script>
 
