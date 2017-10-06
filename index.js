@@ -11,9 +11,9 @@ app.on('ready',()=>
 	//console.log('app is ready');
 
 	mainWindow = new BrowserWindow({
-		width: 300,
-		height: 700,
-		resizable: false,
+		minWidth: 300,
+		minHeight: 700,
+		// resizable: false,
 	});
 	mainWindow.loadURL('file://' + __dirname + '/main.html');
 	mainWindow.on('closed',()=>app.quit());
@@ -69,6 +69,28 @@ let menuTemplate =
 				accelerator: 'D',
 				click() {app.quit();}
 			}
+		]
+	}
+	,
+	{
+		label: 'View',
+		submenu:
+		[
+			//TODO: make custom zoom that zoomsin/out and resizes the window
+			// {
+			// 	label: 'zoomin',
+			// 	accelerator: 'CmdOrCtrl+=',
+			// 	click() { console.log("++"); }
+			// },
+			// {
+			// 	label: 'zoomout',
+			// 	accelerator: 'CmdOrCtrl+-',
+			// 	click() { console.log("--"); }
+			// }
+
+			{role: 'resetzoom'},
+			{role: 'zoomin'},
+			{role: 'zoomout'},
 		]
 	}
 	,
@@ -137,7 +159,8 @@ let menuTemplate =
 					electron.dialog.showMessageBox(focusedWindow, options, function () {})
 				}
 			}
-		}]
+			}
+		]
 	}
 ];
 
