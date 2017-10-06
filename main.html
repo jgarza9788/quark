@@ -13,7 +13,7 @@
 		<div id="start">
 			<h1>::Quark::</h1>
 			<button id= "gbutton" onclick="changeState('game')"><b>P</b>lay</button>
-			<button id= "pbutton"><b>D</b>onate</button>
+			<button id= "pbutton" onclick="openDonate()"><b>D</b>onate</button>
 			<div id = "instructions">
 				<div id="title">**Instructions**</div>
 				<div>&rarr;</div><div>Right</div>
@@ -28,7 +28,7 @@
 			<h1>Pause</h1>
 			<button id= "gbutton" onclick="playpause()">un<b>P</b>ause</button>
 			<button id= "cbutton" onclick="resetAndStart()"><b>R</b>estart</button>
-			<button id= "pbutton"><b>D</b>onate</button>
+			<button id= "pbutton" onclick="openDonate()"><b>D</b>onate</button>
 			<div id = "instructions">
 				<div id="title">**Instructions**</div>
 				<div>&rarr;</div><div>Right</div>
@@ -42,7 +42,7 @@
 		<div id="gameover">
 			<h2>Game Over</h2>
 			<button id= "gbutton" onclick="resetAndStart()"><b>R</b>estart</button>
-			<button id= "cbutton"><b>D</b>onate</button>
+			<button id= "cbutton" onclick="openDonate()"><b>D</b>onate</button>
 			<div id = "scores">
 				<div id="title">Scores</div>
 				<div>&rarr;</div>
@@ -63,7 +63,7 @@
 
 		<script>
 			const electron = require('electron');
-	  		const {ipcRenderer} = electron;
+	  		const {ipcRenderer,shell} = electron;
 	  
 			ipcRenderer.on('blur',(event)=>
 			{
@@ -92,7 +92,10 @@
 				changeState("game");
 			}
 
-
+			function openDonate()
+			{
+				shell.openExternal("https://paypal.me/JGarza9788/1");
+			}
 
 		</script>
 
