@@ -362,6 +362,7 @@ function main()
 		dropStart = now;
 	}
 
+
 	if (!done) 
 	{
 		requestAnimationFrame(main);
@@ -388,7 +389,7 @@ function playpause()
 
 function changeState(newState)
 {
-	console.log("tetris.js-changeState()-" + newState );
+	// console.log("tetris.js-changeState()-" + newState );
 	console.log(state + "->" + newState );
 	if (state == newState)
 	{
@@ -410,10 +411,9 @@ function changeState(newState)
 	else if (newState == "game")
 	{
 		onGame();
-		
 	}
 
-	console.log("tetris.js-changeState()-" + newState );
+	console.log("change state successfull");
 	state = newState;
 	main();
 }
@@ -449,7 +449,7 @@ function onGame()
 function resetAndStart()
 {
 	console.log("restart Start");
-
+	done = false;
 
 	for (var y = 0; y < height; y++) 
 	{
