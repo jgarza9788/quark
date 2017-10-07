@@ -27,7 +27,7 @@ html
     /* height: 100px; */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 100px 25px;
+    grid-template-rows: 100px 50px;
     column-width: 120px;
 
     /* background: grey; */
@@ -38,7 +38,7 @@ html
     font-size: 1.75em;
 }
 
-#lines
+#points
 {
     grid-column-start: 1;
     grid-column-end: span 2;
@@ -113,8 +113,8 @@ html
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 20px 50px;
-    width: 150px;
+    margin: 10px 50px;
+    width: 200px;
     height: 50px;
     /* cursor: pointer; */
 }
@@ -128,8 +128,8 @@ html
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 20px 50px;
-    width: 150px;
+    margin: 10px 50px;
+    width: 200px;
     height: 50px;
     /* cursor: pointer; */
 }
@@ -144,8 +144,8 @@ html
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 20px 50px;
-    width: 150px;
+    margin: 10px 50px;
+    width: 200px;
     height: 50px;
     /* cursor: pointer; */
 }
@@ -159,8 +159,8 @@ html
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 20px 50px;
-    width: 150px;
+    margin: 10px 50px;
+    width: 200px;
     height: 50px;
     /* cursor: pointer; */
 }
@@ -168,12 +168,13 @@ html
 #instructions
 {
     
-    background-color: #f22987;
+    /* background-color: #f22987; */
     border: none;
-    color: #000000;
-    font-size: 16px;
-    margin: 20px auto ;
-    width: 150px;
+    /* color: #000000; */
+    color: #f22987;
+    font-size: 24px;
+    margin: 10px auto ;
+    width: 200px;
     height: 175px;
     opacity: 1;
 
@@ -183,38 +184,79 @@ html
     /* font-weight: bold; */
 }
 
+#instructions #title
+{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    /* border-color: #f22987;
+    border-width: 2; */
+}
+
+#instructions div
+{
+    font-weight: bold;
+    border-style: solid;
+    border-color: #f22987;
+    border-width: 1px;
+}
+#instructions #sym
+{
+    font-size: 32px;
+}
+
+
 #scores
 {
     
-    background-color: #f22987;
+    /* background-color: #f22987; */
     border: none;
-    color: #000000;
-    font-size: 16px;
-    margin: 20px auto ;
-    width: 250px;
-    height: 275px;
-    overflow-y: scroll;
+    /* color: #000000; */
+    color: #f22987;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px auto ;
+    width: 200px;
+    height: auto;
+    /* overflow-y: scroll; */
     /* opacity: 0.90; */
 
     display: grid;
-    grid-template-columns: repeat(1,1fr);
+    grid-template-columns: repeat(2,1fr);
     grid-template-rows: auto;
     
     /* font-weight: bold; */
-    text-align: left;
-    padding: 10px;
+    text-align: center;
+    /* padding: 10px; */
+    border-style: solid;
+    border-color: #f22987;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    
 }
 
-#instructions #title
+
+
+#scores div
+{
+    border-style: solid;
+    border-color: #f22987;
+
+    border-bottom-width: 1px;
+    border-top-width: 1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    height: auto;
+}
+
+#scores #title
 {
     grid-column-start: 1;
     grid-column-end: 3;
 }
 
-#scores div
-{
-    height: 25px;
-}
+
 
 /* #scores #title
 {

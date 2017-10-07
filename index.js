@@ -11,10 +11,10 @@ app.on('ready',()=>
 	//console.log('app is ready');
 
 	mainWindow = new BrowserWindow({
-		width: 300,
-		height: 700,
-		minWidth: 300,
-		minHeight: 700,
+		width: 350,
+		height: 800,
+		minWidth: 350,
+		minHeight: 800,
 		// resizable: false,
 	});
 	mainWindow.loadURL('file://' + __dirname + '/main.html');
@@ -23,9 +23,6 @@ app.on('ready',()=>
 
 	const mainMenu = Menu.buildFromTemplate(menuTemplate);
 	Menu.setApplicationMenu(mainMenu);
-
-
-
 
 });
 

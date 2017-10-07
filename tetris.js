@@ -181,14 +181,20 @@ Piece.prototype.down = function()
 var dropPoints = 0;
 Piece.prototype.putdown = function()
 {
+	var didloop = false;
+
 	while(!this._collides(0, 1, this.pattern))
 	{
 		this.undraw();
 		this.y++;
-		dropPoints++;
 		this.draw();
+		didloop = true;
 	}
 
+	if (didloop)
+	{
+		dropPoints += 5;
+	}
 	calcPoints();
 }
 
@@ -343,6 +349,11 @@ function key(k)
 		piece.putdown();
 		dropStart = Date.now();
 	}
+
+	if (k == 81)
+	{
+		changeState("gameover");
+	}
 }
 
 function drawBoard() {
@@ -484,6 +495,8 @@ function resetAndStart()
 	console.log("game!");
 }
 
+
+var totalDeltaPts = 0;
 function calcPoints()
 {
 
@@ -494,8 +507,9 @@ function calcPoints()
 	{
 		deltaLinePts = 0;
 	}
+	totalDeltaPts += deltaLinePts;
 
-	var pts = linePts + deltaLinePts + dropPoints;
+	var pts = linePts + totalDeltaPts + dropPoints;
 
 	pointcount.textContent = "Points: " + pts;
 
@@ -507,6 +521,7 @@ function resetPoints()
 	lines = 0;
 	deltaLines = 0;
 	dropStart = 0;
+	totalDeltaPts = 0;
 	pointcount.textContent = "Points: 0";
 }
 
