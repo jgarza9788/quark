@@ -1,6 +1,7 @@
 var canvas = document.getElementById('board');
 var ctx = canvas.getContext("2d");
-var linecount = document.getElementById('lines');
+// var linecount = document.getElementById('lines');
+var pointcount = document.getElementById('points');
 var nextPiece = document.getElementById('next');
 var clear = window.getComputedStyle(canvas).getPropertyValue('background-color');
 var width = 10;
@@ -176,14 +177,19 @@ Piece.prototype.down = function()
 	}
 };
 
+
+var dropPoints = 0;
 Piece.prototype.putdown = function()
 {
 	while(!this._collides(0, 1, this.pattern))
 	{
 		this.undraw();
 		this.y++;
+		dropPoints++;
 		this.draw();
 	}
+
+	calcPoints();
 }
 
 Piece.prototype.moveRight = function() {
@@ -203,6 +209,7 @@ Piece.prototype.moveLeft = function() {
 };
 
 var lines = 0;
+var deltaLines = 0;
 var done = false;
 Piece.prototype.lock = function() {
 	for (var ix = 0; ix < this.pattern.length; ix++) {
@@ -241,10 +248,14 @@ Piece.prototype.lock = function() {
 		}
 	}
 
-	if (nlines > 0) {
+	if (nlines > 0) 
+	{
 		lines += nlines;
+		deltaLines = nlines;
 		drawBoard();
-		linecount.textContent = "Lines: " + lines;
+		// linecount.textContent = "Lines: " + lines;
+
+		calcPoints();
 	}
 };
 
@@ -304,7 +315,8 @@ document.body.addEventListener("keyup", function (e) {
 }, false);
 
 //http://keycode.info/
-function key(k) {
+function key(k) 
+{
 	if (done) 
 	{
 		return;
@@ -326,7 +338,7 @@ function key(k) {
 		piece.moveRight();
 		// dropStart = Date.now();
 	}
-	if (k == 17) //Ctrl
+	if (k == 17 || k == 32) //Ctrl or space
 	{
 		piece.putdown();
 		dropStart = Date.now();
@@ -462,15 +474,44 @@ function resetAndStart()
 	drawBoard();
 
 	console.log("0 lines");
-	lines = 0;
-	linecount.textContent = "Lines: " + lines;
+	// lines = 0;
+	// linecount.textContent = "Lines: " + lines;
+
+	resetPoints()
 
 	changeState("game");
 
 	console.log("game!");
 }
 
+function calcPoints()
+{
+
+	var linePts = lines * 100;
+
+	var deltaLinePts = (deltaLines-1) * 50
+	if (deltaLinePts < 0)
+	{
+		deltaLinePts = 0;
+	}
+
+	var pts = linePts + deltaLinePts + dropPoints;
+
+	pointcount.textContent = "Points: " + pts;
+
+	deltaLines = 0;
+}
+
+function resetPoints()
+{
+	lines = 0;
+	deltaLines = 0;
+	dropStart = 0;
+	pointcount.textContent = "Points: 0";
+}
+
 piece = newPiece();
 drawBoard();
-linecount.textContent = "Lines: 0";
+// linecount.textContent = "Lines: 0";
+pointcount.textContent = "Points: 0";
 main();
