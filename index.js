@@ -1,3 +1,4 @@
+
 const electron = require('electron');
 const {app, BrowserWindow,Menu, ipcMain,shell} = electron; 
 
@@ -13,7 +14,7 @@ let mainWindow;
 let addScore;
 let forceAddScore = false;
 
-var highScores = 
+let highScores = 
 [
 {name:' ',score:09},
 {name:' ',score:08},
@@ -55,8 +56,9 @@ app.on('ready',()=>
 	});
 	addScore.loadURL('file://' + __dirname + '/addScore.html');
 	addScore.setMenu(null);
+	addScore.hide();
 
-	forceAddScore= true;
+	// forceAddScore= true;
 	addScore.on('blur', function (event) 
 	{
 		if (forceAddScore)
@@ -90,13 +92,6 @@ app.on('ready',()=>
 
 
 
-
-	// storage.set(  'highScores' , highScores, function(error, data) 
-	// {
-	// 	if (error) throw error;
-	// 	highScores = data.highScores;
-	// });
-
 	storage.has('highScores', function(error, hasKey) 
 	{
 		if (error) throw error;
@@ -108,6 +103,8 @@ app.on('ready',()=>
 			storage.getAll(function(error, data) 
 			{
 				if (error) throw error;
+				// console.log(data);
+				// console.log(data.highScores);
 				highScores= data.highScores;
 			});
 		}
@@ -117,7 +114,6 @@ app.on('ready',()=>
 			storage.set(  'highScores' , highScores, function(error, data) 
 			{
 				if (error) throw error;
-				highScores = data;
 			});
 
 			storage.getAll(function(error, data) 
@@ -128,7 +124,7 @@ app.on('ready',()=>
 		}
 	  });
 
-	highScores=sort(highScores);
+	// highScores=sort(highScores);
 
 	console.log(highScores);
 
@@ -167,7 +163,10 @@ ipcMain.on('addHighScore', function(event, score)
 	}
 
 	console.log(highScores);
-	storage.set(  'highScores' , highScores, null);
+	storage.set(  'highScores' , highScores,  function(error, data) 
+	{
+		if (error) throw error;
+	});
 	
 	if (isHighScore)
 	{
@@ -201,10 +200,28 @@ ipcMain.on('addHighScore', function(event, score)
 var Name = "";
 ipcMain.on('addName', function(event, data) 
 {
+
+	console.log(storage.getDataPath());
+
+	console.log(data);
+	console.log(data.name);
+	console.log(data.scorei);
+	console.log(highScores);
+	// console.log(highScores[data.scorei]);
+
+	for (var i = 0 ; i < highScores.length;i++)
+	{
+		console.log(highScores[i]);
+	}
+
 	highScores[data.scorei].name = data.name;
 	Name = data.name;
 
-	storage.set(  'highScores' , highScores, null);
+	storage.set(  'highScores' , highScores, function(error, data) 
+	{
+		if (error) throw error;
+		highScores = data;
+	});
 
 	mainWindow.webContents.send("renderScores",highScores);
 
@@ -213,24 +230,24 @@ ipcMain.on('addName', function(event, data)
 });
 
 
-function sort(arr)
-{
-	for(var i = 0; i < arr.length;i++)
-	{
-		for(var j = 0; j < arr.length;j++)
-		{
-			var t = arr[i];
+// function sort(arr)
+// {
+// 	for(var i = 0; i < arr.length;i++)
+// 	{
+// 		for(var j = 0; j < arr.length;j++)
+// 		{
+// 			var t = arr[i];
 			
-			if (arr[j].score < arr[i].score)
-			{
-				arr[i] = arr[j];
-				arr[j] = t;
-			}
-		}
-	}
+// 			if (arr[j].score < arr[i].score)
+// 			{
+// 				arr[i] = arr[j];
+// 				arr[j] = t;
+// 			}
+// 		}
+// 	}
 
-	return arr;
-}
+// 	return arr;
+// }
 
 
 let menuTemplate = 
