@@ -10,17 +10,19 @@ var dataPath = '';
 const os = require('os');
 
 let mainWindow;
+let addScore;
+let forceAddScore = false;
 
 var highScores = 
 [
-{name:' ',score:00},
-{name:' ',score:1},
-{name:' ',score:00},
-{name:' ',score:00},
-{name:' ',score:00},
-{name:' ',score:00},
-{name:' ',score:00},
-{name:' ',score:100},
+{name:' ',score:09},
+{name:' ',score:08},
+{name:' ',score:07},
+{name:' ',score:06},
+{name:' ',score:05},
+{name:' ',score:04},
+{name:' ',score:03},
+{name:' ',score:02},
 {name:' ',score:01},
 {name:' ',score:00}
 ];
@@ -41,10 +43,43 @@ app.on('ready',()=>
 	mainWindow.on('closed',()=>app.quit());
 	mainWindow.on('blur', function () { mainWindow.webContents.send('playpause', ""); })
 
+	
+
 	const mainMenu = Menu.buildFromTemplate(menuTemplate);
 	Menu.setApplicationMenu(mainMenu);
 
 
+
+	addScore = new BrowserWindow({
+		width: 400,
+		height: 275,
+		resizable: false,
+		frame: false,
+	});
+	addScore.loadURL('file://' + __dirname + '/addScore.html');
+	addScore.setMenu(null);
+
+
+	forceAddScore= true;
+	addScore.on('blur', function (event) 
+	{
+		if (forceAddScore)
+		{
+			addScore.show();
+		}
+	});
+
+
+	mainWindow.on('move', moveAddScore)
+	mainWindow.on('resize', moveAddScore)
+
+
+	function moveAddScore () 
+	{
+		var mwSize = mainWindow.getSize();
+		var pos = mainWindow.getPosition();
+		addScore.setPosition(pos[0] + parseInt(mwSize[0]/2) - 200, pos[1] + 50)
+	}
 
 	var thisfolder = (process.platform=='win32')?'/AppData/Local/.quark/':'/.quark';
 	thisfolder = path.join(os.homedir(),thisfolder);
@@ -73,12 +108,12 @@ app.on('ready',()=>
 		if (hasKey) 
 		{
 		  //NOTHING
-		  console.log('Has Key');
-		  storage.getAll(function(error, data) 
-		  {
-			  if (error) throw error;
-			  highScores= data.highScores;
-		  });
+			console.log('Has Key');
+			storage.getAll(function(error, data) 
+			{
+				if (error) throw error;
+				highScores= data.highScores;
+			});
 		}
 		else
 		{
@@ -88,11 +123,14 @@ app.on('ready',()=>
 				if (error) throw error;
 				highScores = data;
 			});
+
+			storage.getAll(function(error, data) 
+			{
+				if (error) throw error;
+				highScores= data.highScores;
+			});
 		}
 	  });
-
-
-	console.log(highScores);
 
 	highScores=sort(highScores);
 
@@ -100,12 +138,82 @@ app.on('ready',()=>
 
 });
 
-
-
-ipcMain.on('newScore', function(event, score) 
+ipcMain.on('addHighScore', function(event, score) 
 {
+	// highScores[highScores.length] = {name:'_?_',score:score};
 
-	//storage.set( date , { name: 'you', score: score }, null);
+	mainWindow.webContents.send("renderScores",highScores);
+
+	console.log("addHighScore: " + score);
+	console.log(highScores);
+
+	var isHighScore = false;
+	var scorei = 0;
+
+	for(var i = 0 ;i < highScores.length;i++)
+	{
+		if (score >= highScores[i].score)
+		{
+			isHighScore= true;
+			var temp = highScores[i];
+			highScores[i] = {name:'???',score:score};
+			scorei = i;
+
+			for (var j = i + 1;j < highScores.length;j++)
+			{
+				var temp2 = highScores[j];
+				highScores[j] = temp;
+				temp = temp2;
+			}
+
+			i += 100;
+		}
+	}
+
+	console.log(highScores);
+	storage.set(  'highScores' , highScores, null);
+	
+	if (isHighScore)
+	{
+		// showAddScore();
+		forceAddScore = true;
+		addScore.show();
+		addScore.webContents.send('openAddScore', {placement:(scorei+1),scorei:scorei,score:score,defaultName:Name});
+	}
+	
+});
+
+
+// function showAddScore()
+// {
+
+// 	if (addScore==null)
+// 	{
+// 		addScore = new BrowserWindow({
+// 			width: 400,
+// 			height: 275,
+// 			resizable: false,
+// 		});
+// 		addScore.loadURL('file://' + __dirname + '/addScore.html');
+// 		addScore.setMenu(null);
+// 		addScore.hide();
+// 	}
+// 	addScore.show();
+// }
+
+
+var Name = "";
+ipcMain.on('addName', function(event, data) 
+{
+	highScores[data.scorei].name = data.name;
+	Name = data.name;
+
+	storage.set(  'highScores' , highScores, null);
+
+	mainWindow.webContents.send("renderScores",highScores);
+
+	forceAddScore = false;
+	addScore.hide();
 });
 
 

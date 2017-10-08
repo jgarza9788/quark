@@ -216,17 +216,26 @@ Piece.prototype.moveLeft = function() {
 	}
 };
 
+
+
+
+
 var lines = 0;
 var deltaLines = 0;
 var done = false;
-Piece.prototype.lock = function() {
-	for (var ix = 0; ix < this.pattern.length; ix++) {
-		for (var iy = 0; iy < this.pattern.length; iy++) {
-			if (!this.pattern[ix][iy]) {
+Piece.prototype.lock = function() 
+{
+	for (var ix = 0; ix < this.pattern.length; ix++) 
+	{
+		for (var iy = 0; iy < this.pattern.length; iy++) 
+		{
+			if (!this.pattern[ix][iy]) 
+			{
 				continue;
 			}
 
-			if (this.y + iy < 0) {
+			if (this.y + iy < 0) 
+			{
 				// Game ends!
 				// alert("You're done!");
 				changeState("gameover");
@@ -298,6 +307,7 @@ Piece.prototype._fill = function(color)
 
 
 
+
 Piece.prototype.undraw = function(ctx) 
 {
 	this._fill(clear);
@@ -365,10 +375,10 @@ function key(k)
 		// dropStart = Date.now();
 	}
 
-	if (k == 81)
-	{
-		changeState("gameover");
-	}
+	// if (k == 81)
+	// {
+	// 	changeState("gameover");
+	// }
 }
 
 function drawBoard() 
@@ -385,6 +395,7 @@ function drawBoard()
 
 function main() 
 {
+	console.log(state);
 	changeState(state);
 
 	if (state != "game")
@@ -395,11 +406,19 @@ function main()
 	var now = Date.now();
 	var delta = now - dropStart;
 
-	if (delta > (1000 - (lines * 10)))
+	if (piece !=null)
 	{
-		piece.down();
-		dropStart = now;
+		if (delta > (1000 - (lines * 10)))
+		{
+			piece.down();
+			dropStart = now;
+		}
 	}
+	else
+	{
+		piece = newPiece();
+	}
+	
 
 
 	if (!done) 
@@ -435,6 +454,8 @@ function changeState(newState)
 		return;
 	}
 
+	
+
 	if (newState == "start")
 	{
 		onStart();
@@ -452,8 +473,16 @@ function changeState(newState)
 		onGame();
 	}
 
-	console.log("change state successfull");
+	if (newState == "game" && state=="gameover")
+	{
+		piece= newPiece();
+	}
+
+
 	state = newState;
+	console.log("change state successfull");
+	
+	console.log(state);
 	main();
 }
 
@@ -473,7 +502,7 @@ function onPause()
 
 function onGameover()
 {
-	newScore(pts);
+	addHighScore(pts);
 	startMenu.style.display = "none";
 	pauseMenu.style.display = "none";
 	goMenu.style.display = "block";
@@ -481,6 +510,7 @@ function onGameover()
 
 function onGame()
 {
+	done =  false;
 	startMenu.style.display = "none";
 	pauseMenu.style.display = "none";
 	goMenu.style.display = "none";
@@ -489,7 +519,7 @@ function onGame()
 function resetAndStart()
 {
 	console.log("restart Start");
-	done = false;
+	
 
 	for (var y = 0; y < height; y++) 
 	{
@@ -499,17 +529,43 @@ function resetAndStart()
 		}
 	}
 
-	drawBoard();
+
 
 	console.log("0 lines");
 	// lines = 0;
 	// linecount.textContent = "Lines: " + lines;
 
-	resetPoints()
+	// piece.putdown();
+	// piece.lock();
+	// piece = newPiece();
+	piece = null;
+
+	resetPoints();
+	clearBoard();
+	drawBoard();
 
 	changeState("game");
 
 	console.log("game!");
+}
+
+
+function clearBoard()
+{
+	// for (var ix = 0; ix < piece.pattern.length; ix++) 
+	// {
+	// 	for (var iy = 0; iy < piece.pattern.length; iy++) 
+	// 	{
+	// 		board[piece.y + iy][piece.x + ix] = "";
+	// 	}
+	// }
+	for (var y = 0; y < height; y++) 
+	{
+		for (var x = 0; x < width; x++) 
+		{
+			board[y][x] == "";
+		}
+	}
 }
 
 

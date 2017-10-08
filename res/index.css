@@ -119,6 +119,9 @@ html
     /* cursor: pointer; */
 }
 
+
+
+
 #cbutton
 {
     background-color: #6be5f2;
@@ -212,7 +215,7 @@ html
     border: none;
     /* color: #000000; */
     color: #f22987;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     margin: 10px auto ;
     width: 200px;
@@ -221,7 +224,7 @@ html
     /* opacity: 0.90; */
 
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: 100px 100px;
     grid-template-rows: auto;
     
     /* font-weight: bold; */
@@ -236,6 +239,49 @@ html
     
 }
 
+form div
+{
+    padding: 10px;
+    display: block;
+    margin: auto;
+}
+
+form label
+{
+    font-size: 24px;
+    color:#a2d92b;
+}
+
+form div text
+{
+    font-size: 24px;
+    color:#a37ef2;
+}
+
+
+
+#input
+{
+    font-size: 24px;
+    font-weight: bold;
+    color:#f22987;
+}
+
+#submitScore
+{
+    background-color: #a2d92b;
+    border: none;
+    color: #000000;
+    /* padding: 15px 32px; */
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    
+    margin: auto;
+    width: 75%;
+    height: 50px;
+}
 
 
 #scores div
@@ -248,6 +294,10 @@ html
     border-left-width: 0px;
     border-right-width: 0px;
     height: auto;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #scores #title

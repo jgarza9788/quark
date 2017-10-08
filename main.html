@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>Tetris</title>
+		<title>Quark: Tetris Clone</title>
 		<link rel="stylesheet" href="res/materialize.min.css">
 		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
 		<!-- <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
@@ -45,6 +45,7 @@
 			<button id= "cbutton" onclick="openDonate()"><b>D</b>onate</button>
 			<div id = "scores">
 				<div id="title">Scores</div>
+				<!-- 
 				<div>Serjay</div><div>4000pts</div>
 				<div>xxxxxx</div><div>4000pts</div>
 				<div>Serjay</div><div>4000pts</div>
@@ -54,8 +55,8 @@
 				<div>dddddd</div><div>4000pts</div>
 				<div>Serjay</div><div>4000pts</div>
 				<div>Serjay</div><div>4000pts</div>
-				<div>Serjay</div><div>4000pts</div>
-				
+				<div>Serjay</div><div>4000pts</div> 
+				-->
 			</div>
 		</div>
 		<div id="game">		
@@ -90,6 +91,41 @@
 				playpause();
 			});
 
+			ipcRenderer.on('renderScores',(event,data)=>
+			{
+				var scores = document.getElementById('scores');
+
+				while ( scores.firstChild ) 
+				{
+					scores.removeChild( scores.firstChild );
+				}
+
+				var title = document.createElement('div');
+				title.id = "title";
+				title.innerText = "Scores";
+				scores.appendChild(title);
+
+				for (var i = 0; i < data.length;i++)
+				{
+					var newName = document.createElement('div');
+					newName.innerText = data[i].name;
+					var newScore = document.createElement('div');
+					newScore.innerText =  data[i].score;
+					scores.appendChild(newName);
+					scores.appendChild(newScore);
+				}
+
+				// var newName = document.createElement('div');
+				// newName.innerText = "Name01";
+				// var newScore = document.createElement('div');
+				// newScore.innerText = "100";
+
+				// scores.appendChild(newName);
+				// scores.appendChild(newScore);
+
+			});
+
+			
 
 			function changeState_start()
 			{
@@ -107,11 +143,26 @@
 			}
 
 
-			function newScore(score)
+			function addHighScore(score)
 			{
 				console.log(score);
-				ipcRenderer.send('newScore',score);
+				// addScores();
+				ipcRenderer.send('addHighScore',score);
 			}
+
+
+			// function addScores()
+			// {
+			// 	var scores = document.getElementById('scores');
+
+			// 	var newName = document.createElement('div');
+			// 	newName.innerText = "Name01";
+			// 	var newScore = document.createElement('div');
+			// 	newScore.innerText = "100";
+
+			// 	scores.appendChild(newName);
+			// 	scores.appendChild(newScore);
+			// }
 
 		</script>
 
