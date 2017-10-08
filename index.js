@@ -1,10 +1,30 @@
 const electron = require('electron');
 const {app, BrowserWindow,Menu, ipcMain,shell} = electron; 
+
+const fs = require('fs')
 const path = require('path');
+const dateFormat = require('dateformat');
+
+const storage = require('electron-json-storage');
+var dataPath = '';
+const os = require('os');
 
 let mainWindow;
-let scoresWindow;
-let instructionsWindow;
+
+var highScores = 
+[
+{name:' ',score:00},
+{name:' ',score:1},
+{name:' ',score:00},
+{name:' ',score:00},
+{name:' ',score:00},
+{name:' ',score:00},
+{name:' ',score:00},
+{name:' ',score:100},
+{name:' ',score:01},
+{name:' ',score:00}
+];
+
 
 app.on('ready',()=>
 {
@@ -24,7 +44,89 @@ app.on('ready',()=>
 	const mainMenu = Menu.buildFromTemplate(menuTemplate);
 	Menu.setApplicationMenu(mainMenu);
 
+
+
+	var thisfolder = (process.platform=='win32')?'/AppData/Local/.quark/':'/.quark';
+	thisfolder = path.join(os.homedir(),thisfolder);
+	console.log(thisfolder);
+
+	if(!fs.existsSync(thisfolder))
+	{
+		fs.mkdirSync(thisfolder);
+	}
+
+	storage.setDataPath(thisfolder);
+
+
+
+
+	// storage.set(  'highScores' , highScores, function(error, data) 
+	// {
+	// 	if (error) throw error;
+	// 	highScores = data.highScores;
+	// });
+
+	storage.has('highScores', function(error, hasKey) 
+	{
+		if (error) throw error;
+	  
+		if (hasKey) 
+		{
+		  //NOTHING
+		  console.log('Has Key');
+		  storage.getAll(function(error, data) 
+		  {
+			  if (error) throw error;
+			  highScores= data.highScores;
+		  });
+		}
+		else
+		{
+			console.log('No Key');
+			storage.set(  'highScores' , highScores, function(error, data) 
+			{
+				if (error) throw error;
+				highScores = data;
+			});
+		}
+	  });
+
+
+	console.log(highScores);
+
+	highScores=sort(highScores);
+
+	console.log(highScores);
+
 });
+
+
+
+ipcMain.on('newScore', function(event, score) 
+{
+
+	//storage.set( date , { name: 'you', score: score }, null);
+});
+
+
+function sort(arr)
+{
+	for(var i = 0; i < arr.length;i++)
+	{
+		for(var j = 0; j < arr.length;j++)
+		{
+			var t = arr[i];
+			
+			if (arr[j].score < arr[i].score)
+			{
+				arr[i] = arr[j];
+				arr[j] = t;
+			}
+		}
+	}
+
+	return arr;
+}
 
 
 let menuTemplate = 

@@ -80,6 +80,8 @@ function drawSquare(x, y)
 	ctx.strokeStyle = ss;
 }
 
+
+
 function Piece(patterns, color) {
 	this.pattern = patterns[0];
 	this.patterns = patterns;
@@ -236,18 +238,26 @@ Piece.prototype.lock = function() {
 	}
 
 	var nlines = 0;
-	for (var y = 0; y < height; y++) {
+	for (var y = 0; y < height; y++) 
+	{
 		var line = true;
-		for (var x = 0; x < width; x++) {
+		for (var x = 0; x < width; x++) 
+		{
 			line = line && board[y][x] !== "";
 		}
-		if (line) {
-			for (var y2 = y; y2 > 1; y2--) {
-				for (var x = 0; x < width; x++) {
+		
+		if (line) 
+		{
+			for (var y2 = y; y2 > 1; y2--) 
+			{
+				for (var x = 0; x < width; x++) 
+				{
 					board[y2][x] = board[y2-1][x];
 				}
 			}
-			for (var x = 0; x < width; x++) {
+
+			for (var x = 0; x < width; x++) 
+			{
 				board[0][x] = "";
 			}
 			nlines++;
@@ -265,12 +275,12 @@ Piece.prototype.lock = function() {
 	}
 };
 
-Piece.prototype._fill = function(color) {
+Piece.prototype._fill = function(color) 
+{
 	var fs = ctx.fillStyle;
 	ctx.fillStyle = color;
 	var x = this.x;
 	var y = this.y;
-
 
 	for (var ix = 0; ix < this.pattern.length; ix++) 
 	{
@@ -282,14 +292,19 @@ Piece.prototype._fill = function(color) {
 			}
 		}
 	}
+
 	ctx.fillStyle = fs;
 };
 
-Piece.prototype.undraw = function(ctx) {
+
+
+Piece.prototype.undraw = function(ctx) 
+{
 	this._fill(clear);
 };
 
-Piece.prototype.draw = function(ctx) {
+Piece.prototype.draw = function(ctx) 
+{
 	this._fill(this.color);
 };
 
@@ -347,7 +362,7 @@ function key(k)
 	if (k == 17 || k == 32) //Ctrl or space
 	{
 		piece.putdown();
-		dropStart = Date.now();
+		// dropStart = Date.now();
 	}
 
 	if (k == 81)
@@ -356,7 +371,8 @@ function key(k)
 	}
 }
 
-function drawBoard() {
+function drawBoard() 
+{
 	var fs = ctx.fillStyle;
 	for (var y = 0; y < height; y++) {
 		for (var x = 0; x < width; x++) {
@@ -457,6 +473,7 @@ function onPause()
 
 function onGameover()
 {
+	newScore(pts);
 	startMenu.style.display = "none";
 	pauseMenu.style.display = "none";
 	goMenu.style.display = "block";
@@ -497,6 +514,7 @@ function resetAndStart()
 
 
 var totalDeltaPts = 0;
+var pts = 0
 function calcPoints()
 {
 
@@ -509,7 +527,7 @@ function calcPoints()
 	}
 	totalDeltaPts += deltaLinePts;
 
-	var pts = linePts + totalDeltaPts + dropPoints;
+	pts = linePts + totalDeltaPts + dropPoints;
 
 	pointcount.textContent = "Points: " + pts;
 
@@ -530,3 +548,9 @@ drawBoard();
 // linecount.textContent = "Lines: 0";
 pointcount.textContent = "Points: 0";
 main();
+
+
+
+/**/
+
+

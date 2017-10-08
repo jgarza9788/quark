@@ -90,6 +90,7 @@
 				playpause();
 			});
 
+
 			function changeState_start()
 			{
 				changeState("start");
@@ -103,6 +104,13 @@
 			function openDonate()
 			{
 				shell.openExternal("https://paypal.me/JGarza9788/1");
+			}
+
+
+			function newScore(score)
+			{
+				console.log(score);
+				ipcRenderer.send('newScore',score);
 			}
 
 		</script>
