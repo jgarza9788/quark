@@ -6,8 +6,10 @@ const fs = require('fs')
 const path = require('path');
 const dateFormat = require('dateformat');
 
+//EJS
 const storage = require('electron-json-storage');
-var dataPath = '';
+
+
 const os = require('os');
 
 let mainWindow;
@@ -79,6 +81,7 @@ app.on('ready',()=>
 		addScore.setPosition(pos[0] + parseInt(mwSize[0]/2) - 200, pos[1] + 50)
 	}
 
+
 	var thisfolder = (process.platform=='win32')?'/AppData/Local/.quark/':'/.quark';
 	thisfolder = path.join(os.homedir(),thisfolder);
 	console.log(thisfolder);
@@ -88,10 +91,12 @@ app.on('ready',()=>
 		fs.mkdirSync(thisfolder);
 	}
 
+
+//EJS
 	storage.setDataPath(thisfolder);
 
 
-
+//EJS
 	storage.has('highScores', function(error, hasKey) 
 	{
 		if (error) throw error;
@@ -100,34 +105,43 @@ app.on('ready',()=>
 		{
 		  //NOTHING
 			console.log('Has Key');
-			storage.getAll(function(error, data) 
-			{
+			// storage.getAll(function(error, data) 
+			// {
+			// 	if (error) throw error;
+			// 	// console.log(data);
+			// 	// console.log(data.highScores);
+			// 	highScores= data.highScores;
+			// });
+
+			storage.get('highScores', function(error, data) {
 				if (error) throw error;
-				// console.log(data);
-				// console.log(data.highScores);
-				highScores= data.highScores;
+				highScores= data;
+				console.log(data);
 			});
+
+
 		}
 		else
 		{
 			console.log('No Key');
+			mainWindow.title = "Quark: Saving..."
 			storage.set(  'highScores' , highScores, function(error, data) 
 			{
 				if (error) throw error;
+
+				mainWindow.title = "Quark: Tetris Clone"
 			});
 
-			storage.getAll(function(error, data) 
-			{
-				if (error) throw error;
-				highScores= data.highScores;
-			});
+
 		}
 	  });
+//EJS
 
-	// highScores=sort(highScores);
+	highScores=sort(highScores);
 
 	console.log(highScores);
 
+	
 });
 
 ipcMain.on('addHighScore', function(event, score) 
@@ -163,11 +177,22 @@ ipcMain.on('addHighScore', function(event, score)
 	}
 
 	console.log(highScores);
-	storage.set(  'highScores' , highScores,  function(error, data) 
-	{
-		if (error) throw error;
-	});
-	
+
+//EJS
+	saveLoop();
+	// mainWindow.setTitle("Quark: Saving...");
+	// storage.set(  'highScores' , highScores, function(error, data) 
+	// {
+	// 	if (error) 
+	// 	{
+	// 		console.log("error here");
+	// 		throw error;
+	// 	}
+
+	// 	mainWindow.setTitle("Quark: Tetris Clone");
+	// });
+//EJS
+
 	if (isHighScore)
 	{
 		// showAddScore();
@@ -179,22 +204,7 @@ ipcMain.on('addHighScore', function(event, score)
 });
 
 
-// function showAddScore()
-// {
 
-// 	if (addScore==null)
-// 	{
-// 		addScore = new BrowserWindow({
-// 			width: 400,
-// 			height: 275,
-// 			resizable: false,
-// 		});
-// 		addScore.loadURL('file://' + __dirname + '/addScore.html');
-// 		addScore.setMenu(null);
-// 		addScore.hide();
-// 	}
-// 	addScore.show();
-// }
 
 
 var Name = "";
@@ -217,11 +227,19 @@ ipcMain.on('addName', function(event, data)
 	highScores[data.scorei].name = data.name;
 	Name = data.name;
 
-	storage.set(  'highScores' , highScores, function(error, data) 
-	{
-		if (error) throw error;
-		highScores = data;
-	});
+//EJS
+	saveLoop();
+	// mainWindow.setTitle("Quark: Saving...");
+	// storage.set(  'highScores' , highScores, function(error, data) 
+	// {
+	// 	if (error) 
+	// 	{
+	// 		console.log("error here");
+	// 		throw error;
+	// 	}
+	// 	mainWindow.setTitle("Quark: Tetris Clone");
+	// });
+//EJS
 
 	mainWindow.webContents.send("renderScores",highScores);
 
@@ -230,25 +248,64 @@ ipcMain.on('addName', function(event, data)
 });
 
 
-// function sort(arr)
-// {
-// 	for(var i = 0; i < arr.length;i++)
-// 	{
-// 		for(var j = 0; j < arr.length;j++)
-// 		{
-// 			var t = arr[i];
+function sort(arr)
+{
+	for(var i = 0; i < arr.length;i++)
+	{
+		for(var j = 0; j < arr.length;j++)
+		{
+			var t = arr[i];
 			
-// 			if (arr[j].score < arr[i].score)
-// 			{
-// 				arr[i] = arr[j];
-// 				arr[j] = t;
-// 			}
-// 		}
-// 	}
+			if (arr[j].score < arr[i].score)
+			{
+				arr[i] = arr[j];
+				arr[j] = t;
+			}
+		}
+	}
 
-// 	return arr;
-// }
+	return arr;
+}
 
+//EJS
+function saveLoop()
+{
+	console.log("start loop");
+
+	mainWindow.setTitle("Quark: Saving...");
+	storage.set(  'highScores' , highScores, function(error, data) 
+	{
+		if (error) 
+		{
+			saveLoop0();
+		}
+		else
+		{
+			console.log("saved in saveLoop");
+			mainWindow.setTitle("Quark: Tetris Clone");
+		}
+	});
+}
+
+function saveLoop0()
+{
+	console.log("start loop 0 ");
+
+	mainWindow.setTitle("Quark: Saving...");
+	storage.set(  'highScores' , highScores, function(error, data) 
+	{
+		if (error) 
+		{
+			saveLoop();
+		}
+		else
+		{
+			console.log("saved in saveLoop0");
+			mainWindow.setTitle("Quark: Tetris Clone");
+		}
+	});
+}
+//EJS
 
 let menuTemplate = 
 [
