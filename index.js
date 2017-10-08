@@ -43,12 +43,9 @@ app.on('ready',()=>
 	mainWindow.on('closed',()=>app.quit());
 	mainWindow.on('blur', function () { mainWindow.webContents.send('playpause', ""); })
 
-	
 
 	const mainMenu = Menu.buildFromTemplate(menuTemplate);
 	Menu.setApplicationMenu(mainMenu);
-
-
 
 	addScore = new BrowserWindow({
 		width: 400,
@@ -58,7 +55,6 @@ app.on('ready',()=>
 	});
 	addScore.loadURL('file://' + __dirname + '/addScore.html');
 	addScore.setMenu(null);
-
 
 	forceAddScore= true;
 	addScore.on('blur', function (event) 

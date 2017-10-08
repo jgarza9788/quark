@@ -46,10 +46,10 @@
                 t.innerText = thisText;
 
                 var s = document.getElementById("score");
-                s.innerText = data.score;
+                s.innerText = "Score: " + data.score;
 
                 var i = document.getElementById("input");
-                s.innerText = data.defaultName;
+                i.innerText = data.defaultName;
 			});
         
             document.querySelector('form').addEventListener('submit',(event)=>
