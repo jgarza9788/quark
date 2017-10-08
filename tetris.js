@@ -585,6 +585,11 @@ function calcPoints()
 
 	pts = linePts + totalDeltaPts + dropPoints;
 
+
+	// console.log(linePts);
+	// console.log(totalDeltaPts);
+	// console.log(dropPoints);
+
 	pointcount.textContent = "Points: " + pts;
 
 	deltaLines = 0;
@@ -596,6 +601,7 @@ function resetPoints()
 	deltaLines = 0;
 	dropStart = 0;
 	totalDeltaPts = 0;
+	dropPoints = 0;
 	pointcount.textContent = "Points: 0";
 }
 
