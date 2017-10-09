@@ -176,22 +176,6 @@ ipcMain.on('addHighScore', function(event, score)
 		}
 	}
 
-	console.log(highScores);
-
-//EJS
-	saveLoop();
-	// mainWindow.setTitle("Quark: Saving...");
-	// storage.set(  'highScores' , highScores, function(error, data) 
-	// {
-	// 	if (error) 
-	// 	{
-	// 		console.log("error here");
-	// 		throw error;
-	// 	}
-
-	// 	mainWindow.setTitle("Quark: Tetris Clone");
-	// });
-//EJS
 
 	if (isHighScore)
 	{
@@ -225,6 +209,7 @@ ipcMain.on('addName', function(event, data)
 	}
 
 	highScores[data.scorei].name = data.name;
+	highScores[data.scorei].score = data.score;
 	Name = data.name;
 
 //EJS

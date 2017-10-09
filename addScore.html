@@ -25,6 +25,7 @@
             const {ipcRenderer} = electron;
         
             var scorei = 0;
+            var score = 0;
 			ipcRenderer.on('openAddScore',(event,data)=>
 			{
 
@@ -41,6 +42,7 @@
                 var thisText = "Awesome you've got " + data.placement  + th +" place ";
 
                 scorei = data.scorei;
+                score =  data.score;
 
                 var t = document.getElementById("text");
                 t.innerText = thisText;
@@ -60,7 +62,7 @@
                 // const file = document.querySelector('input').files[0];
                 const {value} = document.querySelector('input');
         
-                ipcRenderer.send('addName',{scorei:scorei,name:value});
+                ipcRenderer.send('addName',{scorei:scorei,name:value,score:score});
                 scorei = 100;
             });
         
