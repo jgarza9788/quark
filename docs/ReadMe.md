@@ -14,6 +14,7 @@ Version: v0.1
     - [electron](#electron)
     - [electron-json-storage](#electron-json-storage)
 - [Using](#using)
+- [Building/Packaging/Compiling](#buildingpackagingcompiling)
 
 <!-- /TOC -->
 
@@ -61,3 +62,8 @@ npm install
 npm start
 ```
 
+# Building/Packaging/Compiling
+
+```
+electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out --icon=icon/win/app.ico
+```

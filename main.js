@@ -18,16 +18,16 @@ let forceAddScore = false;
 
 let highScores = 
 [
-{name:' ',score:09},
-{name:' ',score:08},
-{name:' ',score:07},
-{name:' ',score:06},
-{name:' ',score:05},
-{name:' ',score:04},
-{name:' ',score:03},
-{name:' ',score:02},
-{name:' ',score:01},
-{name:' ',score:00}
+{name:'',score:09},
+{name:'',score:08},
+{name:'',score:07},
+{name:'',score:06},
+{name:'',score:05},
+{name:'',score:04},
+{name:'',score:03},
+{name:'',score:02},
+{name:'',score:01},
+{name:'',score:00}
 ];
 
 
