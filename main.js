@@ -30,16 +30,60 @@ let highScores =
 {name:'',score:0}
 ];
 
+// let mainWindowSize = [350,800]
+// let managerWindowSize =  false;
+
 
 app.on('ready',()=>
 {
 	//console.log('app is ready');
+
+	var thisfolder = (process.platform=='win32')?'/AppData/Local/.quark/':'/.quark';
+	thisfolder = path.join(os.homedir(),thisfolder);
+	console.log(thisfolder);
+
+	if(!fs.existsSync(thisfolder))
+	{
+		fs.mkdirSync(thisfolder);
+	}
+
+	storage.setDataPath(thisfolder);
+
+	// managerWindowSize = true;
+	// storage.has('mainWindowSize', function(error, hasKey) 
+	// {
+	// 	if (error) throw error;
+	  
+	// 	if (hasKey) 
+	// 	{
+	// 		console.log('Has Key');
+
+	// 		storage.get('mainWindowSize', function(error, data) {
+	// 			if (error) throw error;
+	// 			mainWindowSize= data;
+	// 			// mainWindow.setSize(mainWindowSize[0], mainWindowSize[1]);
+	// 			// managerWindowSize = false;
+	// 			console.log(data);
+	// 		});
+	// 	}
+	// 	else
+	// 	{
+	// 		console.log('No Key');
+	// 		storage.set(  'mainWindowSize' , mainWindowSize, function(error, data) 
+	// 		{
+	// 			if (error) throw error;
+	// 			managerWindowSize = false;
+	// 		});
+	// 	}
+	// });
+
 
 	mainWindow = new BrowserWindow({
 		width: 350,
 		height: 800,
 		minWidth: 350,
 		minHeight: 800,
+		// useContentSize: true,
 		// resizable: false,
 	});
 	mainWindow.loadURL('file://' + __dirname + '/main.html');
@@ -73,27 +117,39 @@ app.on('ready',()=>
 	mainWindow.on('move', moveAddScore)
 	mainWindow.on('resize', moveAddScore)
 
-
 	function moveAddScore () 
 	{
 		var mwSize = mainWindow.getSize();
 		var pos = mainWindow.getPosition();
 		addScore.setPosition(pos[0] + parseInt(mwSize[0]/2) - 200, pos[1] + 50)
+
+		// setTimeout(function() { saveNewSize(); }, 1000);
 	}
 
+	
+	// function saveNewSize()
+	// {
+	// 	// console.log("trying to save");
+	// 	// console.log(mainWindowSize);
 
-	var thisfolder = (process.platform=='win32')?'/AppData/Local/.quark/':'/.quark';
-	thisfolder = path.join(os.homedir(),thisfolder);
-	console.log(thisfolder);
+	// 	// console.log(mainWindow.getSize());
+	// 	// console.log(mainWindowSize);
 
-	if(!fs.existsSync(thisfolder))
-	{
-		fs.mkdirSync(thisfolder);
-	}
+	// 	if (!managerWindowSize)
+	// 	{
+	// 		managerWindowSize = true;
+	// 		mainWindowSize= mainWindow.getSize();
+	// 		// console.log(mainWindow.getSize());
+	// 		console.log("newSize: " + mainWindowSize);
+	// 		storage.set(  'mainWindowSize' , mainWindowSize, function(error, data) 
+	// 		{
+	// 			if (error) throw error;
 
+	// 			setTimeout(function() { ()=>{managerWindowSize = false}; }, 1000);
+	// 		});
+	// 	}
+	// }
 
-//EJS
-	storage.setDataPath(thisfolder);
 
 
 //EJS
@@ -213,17 +269,17 @@ ipcMain.on('addName', function(event, data)
 	Name = data.name;
 
 //EJS
-	saveLoop();
-	// mainWindow.setTitle("Quark: Saving...");
-	// storage.set(  'highScores' , highScores, function(error, data) 
-	// {
-	// 	if (error) 
-	// 	{
-	// 		console.log("error here");
-	// 		throw error;
-	// 	}
-	// 	mainWindow.setTitle("Quark: Tetris Clone");
-	// });
+	// saveLoop();
+	mainWindow.setTitle("Quark: Saving...");
+	storage.set(  'highScores' , highScores, function(error, data) 
+	{
+		if (error) 
+		{
+			console.log("error here");
+			throw error;
+		}
+		mainWindow.setTitle("Quark: Tetris Clone");
+	});
 //EJS
 
 	mainWindow.webContents.send("renderScores",highScores);
@@ -253,43 +309,43 @@ function sort(arr)
 }
 
 //EJS
-function saveLoop()
-{
-	console.log("start loop");
+// function saveLoop()
+// {
+// 	console.log("start loop");
 
-	mainWindow.setTitle("Quark: Saving...");
-	storage.set(  'highScores' , highScores, function(error, data) 
-	{
-		if (error) 
-		{
-			saveLoop0();
-		}
-		else
-		{
-			console.log("saved in saveLoop");
-			mainWindow.setTitle("Quark: Tetris Clone");
-		}
-	});
-}
+// 	mainWindow.setTitle("Quark: Saving...");
+// 	storage.set(  'highScores' , highScores, function(error, data) 
+// 	{
+// 		if (error) 
+// 		{
+// 			saveLoop0();
+// 		}
+// 		else
+// 		{
+// 			console.log("saved in saveLoop");
+// 			mainWindow.setTitle("Quark: Tetris Clone");
+// 		}
+// 	});
+// }
 
-function saveLoop0()
-{
-	console.log("start loop 0 ");
+// function saveLoop0()
+// {
+// 	console.log("start loop 0 ");
 
-	mainWindow.setTitle("Quark: Saving...");
-	storage.set(  'highScores' , highScores, function(error, data) 
-	{
-		if (error) 
-		{
-			saveLoop();
-		}
-		else
-		{
-			console.log("saved in saveLoop0");
-			mainWindow.setTitle("Quark: Tetris Clone");
-		}
-	});
-}
+// 	mainWindow.setTitle("Quark: Saving...");
+// 	storage.set(  'highScores' , highScores, function(error, data) 
+// 	{
+// 		if (error) 
+// 		{
+// 			saveLoop();
+// 		}
+// 		else
+// 		{
+// 			console.log("saved in saveLoop0");
+// 			mainWindow.setTitle("Quark: Tetris Clone");
+// 		}
+// 	});
+// }
 //EJS
 
 let menuTemplate = 
@@ -361,6 +417,9 @@ let menuTemplate =
 	}
 ];
 
+
+//MENU FOR DEBUGGING AND STUFF
+/*
 if (process.env.NODE_ENV !== 'production')
 {
 	menuTemplate.push
@@ -415,7 +474,7 @@ if (process.env.NODE_ENV !== 'production')
 		}
 	);
 }
-
+*/
 
 
 //if OSX/macOS
