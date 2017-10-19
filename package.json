@@ -1,6 +1,6 @@
 {
   "name": "quark",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "a tetris clone",
   "main": "main.js",
   "directories": {
@@ -13,11 +13,11 @@
     "package:mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns  --prune=true --osx-sign.identity='JGarza9788@gmail.com' ",
     "package:win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out --icon=assets/app-icon/win/app.ico  --prune=true ",
     "package:linux": "electron-packager . --overwrite --platform=linux --arch=x64 --out=out --prune=true",
-    "package:sign-exe": "signcode './out/win32-ia32/Quark.exe'  --prompt --name 'Quark' --url 'http://JustinGarza.info'",
+    "package:sign-exe": "signcode './out/win32-ia32/quark.exe'  --prompt --name 'Quark' --url 'http://JustinGarza.info'",
     "package:installer": "node ./script/installer.js",
-    "package:sign-installer": "signcode './out/windows-installer/ElectronAPIDemosSetup.exe' --prompt --name 'Quark_Installer' --url 'http://JustinGarza.info'",
-    "package:mas": "./script/mas.sh",
-    "windows-store": "node ./script/windows-store.js",
+    "Xpackage:sign-installer": "signcode './out/windows-installer/quark.exe' --prompt --name 'Quark_Installer' --url 'http://JustinGarza.info'",
+    "Xpackage:mas": "##./script/mas.sh ##this is not working...will fix later##",
+    "Xwindows-store": "##node ./script/windows-store.js ##this is not working...will fix later##",
     "release": "node ./script/release.js"
   },
   "repository": {
@@ -28,7 +28,7 @@
     "tetris"
   ],
   "author": "Justin Garza",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jgarza9788/quark/issues"
   },

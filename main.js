@@ -1,3 +1,9 @@
+const setupEvents = require('./setupEvents')
+if (setupEvents.handleSquirrelEvent()) {
+   // squirrel event handled and app will exit in 1000ms, so don't do anything else
+   return;
+}
+
 
 const electron = require('electron');
 const {app, BrowserWindow,Menu, ipcMain,shell} = electron; 
@@ -30,9 +36,6 @@ let highScores =
 {name:'',score:0}
 ];
 
-// let mainWindowSize = [350,800]
-// let managerWindowSize =  false;
-
 
 app.on('ready',()=>
 {
@@ -49,34 +52,6 @@ app.on('ready',()=>
 
 	storage.setDataPath(thisfolder);
 
-	// managerWindowSize = true;
-	// storage.has('mainWindowSize', function(error, hasKey) 
-	// {
-	// 	if (error) throw error;
-	  
-	// 	if (hasKey) 
-	// 	{
-	// 		console.log('Has Key');
-
-	// 		storage.get('mainWindowSize', function(error, data) {
-	// 			if (error) throw error;
-	// 			mainWindowSize= data;
-	// 			// mainWindow.setSize(mainWindowSize[0], mainWindowSize[1]);
-	// 			// managerWindowSize = false;
-	// 			console.log(data);
-	// 		});
-	// 	}
-	// 	else
-	// 	{
-	// 		console.log('No Key');
-	// 		storage.set(  'mainWindowSize' , mainWindowSize, function(error, data) 
-	// 		{
-	// 			if (error) throw error;
-	// 			managerWindowSize = false;
-	// 		});
-	// 	}
-	// });
-
 
 	mainWindow = new BrowserWindow({
 		width: 350,
@@ -85,10 +60,11 @@ app.on('ready',()=>
 		minHeight: 800,
 		// useContentSize: true,
 		// resizable: false,
+		icon: `${__dirname}/assets/app-icon/png/64.png`
 	});
 	mainWindow.loadURL('file://' + __dirname + '/main.html');
 	mainWindow.on('closed',()=>app.quit());
-	mainWindow.on('blur', function () { mainWindow.webContents.send('playpause', ""); })
+	mainWindow.on('blur', function () { mainWindow.webContents.send('pause', ""); })
 
 
 	const mainMenu = Menu.buildFromTemplate(menuTemplate);

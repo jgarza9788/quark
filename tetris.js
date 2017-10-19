@@ -460,7 +460,7 @@ function changeState(newState)
 	{
 		onStart();
 	}
-	else if (newState == "pause")
+	else if (newState == "pause" && state == "game")
 	{
 		onPause();
 	}
