@@ -75,8 +75,10 @@ app.on('ready',()=>
 		height: 275,
 		resizable: false,
 		frame: false,
+		// webPreferences:{backgroundThrottling: false},
 	});
 	addScore.loadURL('file://' + __dirname + '/addScore.html');
+	moveAddScore();
 	addScore.setMenu(null);
 	addScore.hide();
 
@@ -364,7 +366,7 @@ let menuTemplate =
 			},
 			{
 				label: 'Donate',
-				accelerator: 'D',
+				accelerator: 'CmdOrCtrl+D',
 				click() { openDonate();}
 			}
 		]
