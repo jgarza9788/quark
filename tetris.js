@@ -10,6 +10,7 @@ var tilesz = 24;
 var state = "null"; //start , pause, gameover game
 var startMenu = document.getElementById('start');
 var pauseMenu = document.getElementById('pause');
+var shade = document.getElementById('shade');
 var goMenu = document.getElementById('gameover');
 canvas.width = width * tilesz;
 canvas.height = height * tilesz;
@@ -369,11 +370,15 @@ function key(k)
 		piece.moveRight();
 		// dropStart = Date.now();
 	}
-	if (k == 17 || k == 32) //Ctrl or space
+	if (k == 16) //Shift
 	{
 		piece.putdown();
-		// dropStart = Date.now();
 	}
+	// if (k == 17 || k == 32 || k == 18) //Ctrl or space
+	// {
+	// 	piece.putdown();
+	// 	// dropStart = Date.now();
+	// }
 
 	// if (k == 81)
 	// {
@@ -491,6 +496,7 @@ function onStart()
 	startMenu.style.display = "block";
 	pauseMenu.style.display = "none";
 	goMenu.style.display = "none";
+	shade.style.display = "block";
 }
 
 function onPause()
@@ -498,6 +504,7 @@ function onPause()
 	startMenu.style.display = "none";
 	pauseMenu.style.display = "block";
 	goMenu.style.display = "none";
+	shade.style.display = "block";
 }
 
 function onGameover()
@@ -506,6 +513,7 @@ function onGameover()
 	startMenu.style.display = "none";
 	pauseMenu.style.display = "none";
 	goMenu.style.display = "block";
+	shade.style.display = "block";
 }
 
 function onGame()
@@ -514,6 +522,7 @@ function onGame()
 	startMenu.style.display = "none";
 	pauseMenu.style.display = "none";
 	goMenu.style.display = "none";
+	shade.style.display = "none";
 }
 
 function resetAndStart()

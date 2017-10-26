@@ -20,7 +20,7 @@
 				<div id="sym">&larr;</div><div>Left</div>
 				<div id="sym">&#8634</div><div>Up</div>
 				<div id="sym">&#8635</div><div>Down</div>
-				<div id="sym">&#8615;</div><div>Ctrl or Space</div>
+				<div>&#8615;</div><div>Shift</div>
 				<div>&#10074;&#10074; &#9658;</i></div><div>P</div>
 			</div>
 		</div>
@@ -35,14 +35,25 @@
 				<div>&larr;</div><div>Left</div>
 				<div>&#8634</div><div>Up</div>
 				<div>&#8635</div><div>Down</div>
-				<div>&#8615;</div><div>Ctrl or Space</div>
+				<div>&#8615;</div><div>Shift</div>
 				<div>&#10074;&#10074; &#9658;</i></div><div>P</div>
 			</div>
 		</div>
 		<div id="gameover">
 			<h2>Game Over</h2>
+			<!-- <form id = "savescore">
+				<div>
+					<text id="text">some Info</text>
+					<br />
+					<text id="score">000</text>
+					<br />
+					<label>Enter Name:</label>
+					<input id="input" autofocus/>
+				</div>
+				<button id= "submitScore" type="submit">submit</button>
+			</form> -->
 			<button id= "gbutton" onclick="resetAndStart()"><b>R</b>estart</button>
-			<button id= "cbutton" onclick="openDonate()"><b>D</b>onate</button>
+			<button id= "cbutton" onclick="openDonate()"><b>D</b>onate</button> 
 			<div id = "scores">
 				<div id="title">Scores</div>
 				<!-- 
@@ -59,6 +70,7 @@
 				-->
 			</div>
 		</div>
+		<div id="shade"></div>
 		<div id="game">		
 			<div id="info">
 				<div id="nlabel">Next:</div>

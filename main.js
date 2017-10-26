@@ -59,7 +59,7 @@ app.on('ready',()=>
 		minWidth: 350,
 		minHeight: 800,
 		// useContentSize: true,
-		// resizable: false,
+		resizable: false,
 		icon: `${__dirname}/assets/app-icon/png/64.png`
 	});
 	mainWindow.loadURL('file://' + __dirname + '/main.html');
@@ -370,32 +370,32 @@ let menuTemplate =
 		]
 	}
 	,
-	{
-		label: 'View',
-		submenu:
-		[
-			//TODO: make custom zoom that zoomsin/out and resizes the window
-			// {
-			// 	label: 'zoomin',
-			// 	accelerator: 'CmdOrCtrl+=',
-			// 	click() { console.log("++"); }
-			// },
-			// {
-			// 	label: 'zoomout',
-			// 	accelerator: 'CmdOrCtrl+-',
-			// 	click() { console.log("--"); }
-			// }
+	// {
+	// 	label: 'View',
+	// 	submenu:
+	// 	[
+	// 		//TODO: make custom zoom that zoomsin/out and resizes the window
+	// 		// {
+	// 		// 	label: 'zoomin',
+	// 		// 	accelerator: 'CmdOrCtrl+=',
+	// 		// 	click() { console.log("++"); }
+	// 		// },
+	// 		// {
+	// 		// 	label: 'zoomout',
+	// 		// 	accelerator: 'CmdOrCtrl+-',
+	// 		// 	click() { console.log("--"); }
+	// 		// }
 
-			{role: 'resetzoom'},
-			{role: 'zoomin'},
-			{role: 'zoomout'},
-		]
-	}
+	// 		{role: 'resetzoom'},
+	// 		{role: 'zoomin'},
+	// 		{role: 'zoomout'},
+	// 	]
+	// }
 ];
 
 
 //MENU FOR DEBUGGING AND STUFF
-/*
+
 if (process.env.NODE_ENV !== 'production')
 {
 	menuTemplate.push
@@ -450,7 +450,7 @@ if (process.env.NODE_ENV !== 'production')
 		}
 	);
 }
-*/
+
 
 
 //if OSX/macOS
