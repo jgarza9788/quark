@@ -106,6 +106,12 @@
 				playpause();
 			});
 
+			ipcRenderer.on('restart',(event)=>
+			{
+				console.log("reStart with R")
+				resetAndStart();
+			});
+
 			ipcRenderer.on('renderScores',(event,data)=>
 			{
 				var scores = document.getElementById('scores');
@@ -161,23 +167,25 @@
 			function addHighScore(score)
 			{
 				console.log(score);
-				// addScores();
+				//addScores();
 				ipcRenderer.send('addHighScore',score);
 			}
 
 
-			// function addScores()
-			// {
-			// 	var scores = document.getElementById('scores');
+			/*
+			function addScores()
+			{
+				var scores = document.getElementById('scores');
 
-			// 	var newName = document.createElement('div');
-			// 	newName.innerText = "Name01";
-			// 	var newScore = document.createElement('div');
-			// 	newScore.innerText = "100";
+				var newName = document.createElement('div');
+				//newName.innerText = "Name01";
+				var newScore = document.createElement('div');
+				//newScore.innerText = "100";
 
-			// 	scores.appendChild(newName);
-			// 	scores.appendChild(newScore);
-			// }
+				scores.appendChild(newName);
+				scores.appendChild(newScore);
+			}
+			*/
 
 		</script>
 

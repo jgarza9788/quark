@@ -7,7 +7,7 @@ var clear = window.getComputedStyle(canvas).getPropertyValue('background-color')
 var width = 10;
 var height = 20;
 var tilesz = 24;
-var state = "null"; //start , pause, gameover game
+var state = null; //start , pause, gameover game
 var startMenu = document.getElementById('start');
 var pauseMenu = document.getElementById('pause');
 var shade = document.getElementById('shade');
@@ -401,7 +401,12 @@ function drawBoard()
 function main() 
 {
 	console.log(state);
-	changeState(state);
+	// changeState("start");
+
+	if (state == null)
+	{
+		changeState("start");
+	}
 
 	if (state != "game")
 	{
@@ -454,6 +459,7 @@ function changeState(newState)
 {
 	// console.log("tetris.js-changeState()-" + newState );
 	console.log(state + "->" + newState );
+
 	if (state == newState)
 	{
 		return;

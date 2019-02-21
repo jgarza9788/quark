@@ -175,6 +175,8 @@ app.on('ready',()=>
 
 	console.log(highScores);
 
+	// mainWindow.webContents.send('newState', "start");
+	// mainWindow.webContents.send('newState', "start"); 
 	
 });
 
@@ -365,8 +367,14 @@ let menuTemplate =
 				click() {mainWindow.webContents.send('playpause', "");}
 			},
 			{
+				label: 'Reset',
+				accelerator: 'R',
+				click() {mainWindow.webContents.send('restart',"");}
+			},
+			{
 				label: 'Donate',
-				accelerator: 'CmdOrCtrl+D',
+				// accelerator: 'CmdOrCtrl+D',
+				accelerator: 'D',
 				click() { openDonate();}
 			}
 		]

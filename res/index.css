@@ -358,7 +358,55 @@ form div
     grid-column-end: 3;
 }
 
+#addScoreButton
+{
+    background-color: #a2d92b;
+    border: none;
+    color: #000000;
+    /* padding: 5px 0px; */
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin: 0 auto;
+    width: 200px;
+    height: 50px;
+}
 
+div #text
+{
+    /* background-color: #a2d92b; */
+    /* border: none; */
+    color: #f22987;
+    /* padding: 15px 32px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 5px;
+    /* width: 200px; */
+    /* height: 10px; */
+}
+
+div #score
+{
+    /* background-color: #a2d92b; */
+    /* border: none; */
+    color: #6be5f2;
+    /* padding: 15px 32px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 5px;
+    /* width: 200px; */
+    /* height: 10px; */
+}
+
+form div
+{
+    margin: 25px 25px;
+}
 
 /* #scores #title
 {
@@ -366,12 +414,24 @@ form div
     grid-column-end: 4;
 } */
 
+/*
+#submitScore
+{
+    
+    background-color: #a2d92b;
+    border: none;
+    color: #000000;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+}
+*/
 
 button:hover
 {
     opacity: 1;
 }
-
 
 
 
