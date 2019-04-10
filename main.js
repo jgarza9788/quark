@@ -70,10 +70,12 @@ app.on('ready',()=>
 	const mainMenu = Menu.buildFromTemplate(menuTemplate);
 	Menu.setApplicationMenu(mainMenu);
 
+	//Add Score Window
+	/*
 	addScore = new BrowserWindow({
 		width: 400,
 		height: 275,
-		resizable: false,
+		resizable: true,
 		frame: false,
 		// webPreferences:{backgroundThrottling: false},
 	});
@@ -91,18 +93,26 @@ app.on('ready',()=>
 		}
 	});
 
+	
+	//don't let window close
+	addScore.on('close',() =>{
+		// console.log('closeing the wrong window')
+
+	})
 
 	mainWindow.on('move', moveAddScore)
 	mainWindow.on('resize', moveAddScore)
+	// addScore.on('resize', moveAddScore)
 
 	function moveAddScore () 
 	{
 		var mwSize = mainWindow.getSize();
 		var pos = mainWindow.getPosition();
 		addScore.setPosition(pos[0] + parseInt(mwSize[0]/2) - 200, pos[1] + 50)
-
+		addScore.setSize(400,275)
 		// setTimeout(function() { saveNewSize(); }, 1000);
 	}
+	*/
 
 	
 	// function saveNewSize()
@@ -189,37 +199,17 @@ ipcMain.on('addHighScore', function(event, score)
 	console.log("addHighScore: " + score);
 	console.log(highScores);
 
-	var isHighScore = false;
-	var scorei = 0;
-
-	for(var i = 0 ;i < highScores.length;i++)
-	{
-		if (score >= highScores[i].score)
-		{
-			isHighScore= true;
-			var temp = highScores[i];
-			highScores[i] = {name:'???',score:score};
-			scorei = i;
-
-			for (var j = i + 1;j < highScores.length;j++)
-			{
-				var temp2 = highScores[j];
-				highScores[j] = temp;
-				temp = temp2;
-			}
-
-			i += 100;
-		}
-	}
 
 
-	if (isHighScore)
-	{
+	
+	// if (isHighScore)
+	// {
 		// showAddScore();
-		forceAddScore = true;
-		addScore.show();
-		addScore.webContents.send('openAddScore', {placement:(scorei+1),scorei:scorei,score:score,defaultName:Name});
-	}
+		// forceAddScore = true;
+		// addScore.show();
+		// addScore.webContents.send('openAddScore', {placement:(scorei+1),scorei:scorei,score:score,defaultName:Name});
+	// }
+	
 	
 });
 
@@ -235,18 +225,43 @@ ipcMain.on('addName', function(event, data)
 
 	console.log(data);
 	console.log(data.name);
-	console.log(data.scorei);
-	console.log(highScores);
+	console.log(data.score);
+	// console.log(highScores);
 	// console.log(highScores[data.scorei]);
 
-	for (var i = 0 ; i < highScores.length;i++)
-	{
-		console.log(highScores[i]);
-	}
+	// for (var i = 0 ; i < highScores.length;i++)
+	// {
+	// 	console.log(highScores[i]);
+	// }
 
-	highScores[data.scorei].name = data.name;
-	highScores[data.scorei].score = data.score;
-	Name = data.name;
+	// highScores[data.scorei].name = data.name;
+	// highScores[data.scorei].score = data.score;
+	
+	//var Name = data.name;	
+	var score = parseInt(data.score);
+
+	var isHighScore = false;
+	var scorei = 0;
+
+	for(var i = 0 ;i < highScores.length;i++)
+	{
+		if (score >= highScores[i].score)
+		{
+			isHighScore= true;
+			var temp = highScores[i];
+			highScores[i] = {name:data.name,score:score};
+			scorei = i;
+
+			for (var j = i + 1;j < highScores.length;j++)
+			{
+				var temp2 = highScores[j];
+				highScores[j] = temp;
+				temp = temp2;
+			}
+
+			i += 100;
+		}
+	}
 
 //EJS
 	// saveLoop();
@@ -265,7 +280,7 @@ ipcMain.on('addName', function(event, data)
 	mainWindow.webContents.send("renderScores",highScores);
 
 	forceAddScore = false;
-	addScore.hide();
+	// addScore.hide();
 });
 
 
@@ -363,18 +378,20 @@ let menuTemplate =
 		[
 			{
 				label: 'Play/Pause',
-				accelerator: 'P',
+				//accelerator: 'P',
+				accelerator: 'CmdOrCtrl+P',
 				click() {mainWindow.webContents.send('playpause', "");}
 			},
 			{
 				label: 'Reset',
-				accelerator: 'R',
+				//accelerator: 'R',
+				accelerator: 'CmdOrCtrl+R',
 				click() {mainWindow.webContents.send('restart',"");}
 			},
 			{
 				label: 'Donate',
-				// accelerator: 'CmdOrCtrl+D',
-				accelerator: 'D',
+				accelerator: 'CmdOrCtrl+D',
+				//accelerator: 'D',
 				click() { openDonate();}
 			}
 		]

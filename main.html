@@ -42,19 +42,27 @@
 		<div id="gameover">
 			<h2>Game Over</h2>
 			<form id = "addscore">
+				
 				<div>
-					<!-- <text id="text">You Got 10th Place</text>
+					<text id="text">Submit Your Score</text>
 					<br />
 					<text id="score">10000</text>
-					<br /> -->
+					<br />
 					<label>Enter Name:</label>
 					<input id="input" autofocus/>
+					<button id= "gbutton" type="submit">submit</button>
 				</div>
+				
+				<!--
 				<div id="buttons">
 				<button id= "cancelScore" type="cancel">cancel</button>
 				<button id= "submitScore" type="submit">submit</button>
 				</div>
+				-->
 			</form>
+			<div id = "afterSubmit">
+				<button id= "cbutton" onclick="resetAndStart()"><b>R</b>estart</button>
+			</div>
 			<!-- <button id= "gbutton" onclick="resetAndStart()"><b>R</b>estart</button> -->
 			<!-- <button id= "cbutton" onclick="openDonate()"><b>D</b>onate</button>  -->
 			<div id = "scores">
@@ -114,6 +122,8 @@
 
 			ipcRenderer.on('renderScores',(event,data)=>
 			{
+				console.log('renderScores');
+				console.log(data);
 				var scores = document.getElementById('scores');
 
 				while ( scores.firstChild ) 
@@ -169,6 +179,7 @@
 				console.log(score);
 				//addScores();
 				ipcRenderer.send('addHighScore',score);
+				document.getElementById('score').innerHTML = score;
 			}
 
 
@@ -187,8 +198,25 @@
 			}
 			*/
 
-		</script>
+			document.querySelector('form').addEventListener('submit',(event)=>
+			{
+				event.preventDefault();
 
+				// const file = document.querySelector('input').files[0];
+				const {value} = document.querySelector('input');
+
+				var score = document.getElementById('score').innerHTML;
+
+				data = {name:value,score:score}
+				console.log(data)
+				ipcRenderer.send('addName',data);
+
+				document.getElementById('addscore').style.display = "none";
+				document.getElementById('afterSubmit').style.display = "block";
+			});
+
+		</script>
+		<!--<script src="addScore.js"></script>-->
 		<script src="tetrominoes.js"></script>
 		<script src="tetris.js"></script>
 	</body>

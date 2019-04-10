@@ -560,6 +560,7 @@ function resetAndStart()
 	drawBoard();
 
 	changeState("game");
+	// changeState("gameover");
 
 	console.log("game!");
 }

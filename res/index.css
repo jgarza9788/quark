@@ -268,9 +268,18 @@ form div
 {
     margin: 10px auto;
     margin-bottom: 25px;
-    width: 200px;
-    height: 120px;
+    width: 100%;
+    height: 200px;
     display: block;
+}
+
+#afterSubmit
+{
+    margin: 10px auto;
+    margin-bottom: 25px;
+    width: 100%;
+    height: 200px;
+    display: None;
 }
 
 #addscore  label
@@ -448,3 +457,5 @@ button:hover
     color: #4b4b4c;
     font-size: 1.5em;
 }
+
+
