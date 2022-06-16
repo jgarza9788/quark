@@ -36,10 +36,10 @@
   "homepage": "https://github.com/jgarza9788/quark#readme",
   "dependencies": {
     "dateformat": "^3.0.2",
-    "electron-compile": "^6.4.2",
-    "electron-json-storage": "^3.1.1"
+    "electron-compile": "^3.3.6",
+    "electron-json-storage": "^3.2.0"
   },
   "devDependencies": {
-    "electron": "4.0.5"
+    "electron": "^19.0.4"
   }
 }
